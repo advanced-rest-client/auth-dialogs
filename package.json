@@ -18,7 +18,7 @@
   "author": "The Advanced REST client authors <arc@mulesoft.com>",
   "scripts": {
     "serve": "node_modules/.bin/polymer serve",
-    "lint": "node_modules/.bin/polymer lint auth-dialogs.html --rules polymer-1",
+    "lint": "node_modules/.bin/polymer lint authorization-dialog.html auth-dialogs-behavior.html auth-dialog-ntlm.html auth-dialog-basic.html --rules polymer-1",
     "test-sauce": "node_modules/.bin/polymer test --plugin sauce --job-name \"auth-dialogs:local-test\"",
     "test": "node_modules/.bin/polymer test --plugin local",
     "deps": "npm install --quiet && bower install --quiet",

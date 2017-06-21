@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/advanced-rest-client/auth-dialogs/compare/0.1.1...v0.1.2) (2017-06-21)
+
+
+### Fix
+
+* Added paper button dependency that was added as dev dependency. Also added the paper-button import to the `authorization-dialog.html` that was missing. ([9026b3f409e457e609bd1c0ec26fe518a7ed4eab](https://github.com/advanced-rest-client/auth-dialogs/commit/9026b3f409e457e609bd1c0ec26fe518a7ed4eab))
+
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2017-06-21)
 

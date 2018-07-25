@@ -1,3 +1,9 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/advanced-rest-client/auth-dialogs/compare/0.1.2...2.0.0) (2018-07-25)
+
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/advanced-rest-client/auth-dialogs/compare/0.1.2...v0.1.3) (2017-06-21)
 

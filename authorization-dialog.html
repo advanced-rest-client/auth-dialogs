@@ -1,6 +1,6 @@
 <!--
 @license
-Copyright 2016 The Advanced REST client authors <arc@mulesoft.com>
+Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
 the License at
@@ -11,45 +11,17 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 -->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/legacy/class.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-styles/shadow.html">
 <link rel="import" href="../paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../neon-animation/animations/slide-from-top-animation.html">
 <link rel="import" href="../neon-animation/animations/slide-up-animation.html">
 <link rel="import" href="../neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../neon-animation/animations/fade-in-animation.html">
-<!--
-Base authorization dialog for the Advanced REST Client. It is to be used to create an
-authorization dialogs with common UI and animations.
 
-The dialog extends `Polymer.PaperDialogBehavior` so the hosting application should listen for
-it's events to determine dialog's state.
-
-### Example
-```
-<authorization-dialog>
-  <h2>Basic authorization</h2>
-  <form>
-    <input type="text" name="login"/>
-  </form>
-</authorization-dialog>
-```
-
-### Styling
-`<authorization-dialog>` provides the following custom properties and mixins for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--authorization-dialog` | Mixin applied to the element | `{}`
-`--authorization-dialog-title` | Mixin applied to the title of the dialog | `{}`
-
-Also it implements all `paper-dialog` mixins and variables.
-
-@group UI Elements
-@element authorization-dialog
-@demo demo/index.html
--->
 <dom-module id="authorization-dialog">
   <template>
     <style>
@@ -58,12 +30,12 @@ Also it implements all `paper-dialog` mixins and variables.
       margin: 24px 40px;
       -webkit-overflow-scrolling: touch;
       top: 0px;
-      background: var(--paper-dialog-background-color, --primary-background-color);
-      color: var(--paper-dialog-color, --primary-text-color);
-      @apply(--arc-font-body1);
-      @apply(--shadow-elevation-16dp);
-      @apply(--paper-dialog);
-      @apply(--authorization-dialog);
+      background: var(--paper-dialog-background-color, var(--primary-background-color));
+      color: var(--paper-dialog-color, var(--primary-text-color));
+      @apply --arc-font-body1;
+      @apply --shadow-elevation-16dp;
+      @apply --paper-dialog;
+      @apply --authorization-dialog;
     }
 
     .dialog > * {
@@ -71,17 +43,17 @@ Also it implements all `paper-dialog` mixins and variables.
       padding: 0 24px;
     }
 
-    .dialog > ::content > h2 {
+    .dialog ::slotted(h2) {
       margin: 0;
       margin-top: 24px;
       position: relative;
       padding: 0 24px;
-      @apply(--arc-font-title);
-      @apply(--paper-dialog-title);
-      @apply(--authorization-dialog-title);
+      @apply --arc-font-title;
+      @apply --paper-dialog-title;
+      @apply --authorization-dialog-title;
     }
 
-    .content > ::content > *:last-child {
+    .content ::slotted(*:last-child) {
       margin-bottom: 24px;
     }
 
@@ -90,15 +62,15 @@ Also it implements all `paper-dialog` mixins and variables.
       padding: 8px 8px 8px 24px;
       margin: 0;
       margin-bottom: 24px;
-      color: var(--paper-dialog-button-color, --primary-color);
-      @apply(--layout-horizontal);
-      @apply(--layout-end-justified);
+      color: var(--paper-dialog-button-color, var(--primary-color));
+      @apply --layout-horizontal;
+      @apply --layout-end-justified;
     }
     </style>
     <div class="dialog">
-      <content select="h2"></content>
+      <slot name="title"></slot>
       <div class="content">
-        <content></content>
+        <slot></slot>
       </div>
       <div class="buttons">
         <paper-button dialog-dismiss>Cancel</paper-button>
@@ -107,64 +79,110 @@ Also it implements all `paper-dialog` mixins and variables.
     </div>
   </template>
   <script>
-  Polymer({
-    is: 'authorization-dialog',
-
-    behaviors: [
+  /**
+   * Base authorization dialog for Advanced REST Client. It is to be used to
+   * create authorization dialogs with common UI and animations.
+   *
+   * The dialog extends `Polymer.PaperDialogBehavior` so the hosting application
+   * should listen for it's events to determine dialog's state.
+   *
+   * ### Example
+   *
+   * ```html
+   * <authorization-dialog>
+   *  <h2 slot="title">Basic authorization</h2>
+   *  <form>
+   *   <input type="text" name="login"/>
+   *  </form>
+   * </authorization-dialog>
+   * ```
+   *
+   * ### Styling
+   *
+   * `<authorization-dialog>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--authorization-dialog` | Mixin applied to the element | `{}`
+   * `--authorization-dialog-title` | Mixin applied to the title of the dialog | `{}`
+   *
+   * Also it implements all `paper-dialog` mixins and variables.
+   *
+   * @polymer
+   * @customElement
+   * @memberof UiElements
+   * @demo demo/index.html
+   * @appliesMixin Polymer.PaperDialogBehavior
+   * @appliesMixin Polymer.NeonAnimationRunnerBehavior
+   */
+  class AuthorizationDialog extends Polymer.mixinBehaviors([
       Polymer.PaperDialogBehavior,
       Polymer.NeonAnimationRunnerBehavior
-    ],
-
-    properties: {
-
-      animationConfig: {
-        value: function() {
-          return {
-            'entry': [{
-              name: 'slide-from-top-animation',
-              node: this
-            }, {
-              name: 'fade-in-animation',
-              node: this
-            }],
-            'exit': [{
-              name: 'slide-up-animation',
-              node: this
-            }, {
-              name: 'fade-out-animation',
-              node: this
-            }]
-          };
+    ], Polymer.Element) {
+    static get is() { return 'authorization-dialog'; }
+    static get properties() {
+      return {
+        animationConfig: {
+          value() {
+            return {
+              entry: [{
+                name: 'slide-from-top-animation',
+                node: this
+              }, {
+                name: 'fade-in-animation',
+                node: this
+              }],
+              exit: [{
+                name: 'slide-up-animation',
+                node: this
+              }, {
+                name: 'fade-out-animation',
+                node: this
+              }]
+            };
+          }
+        },
+        // Set to true to disable canceling the overlay by clicking outside it.
+        noCancelOnOutsideClick: {
+          type: Boolean,
+          value: true
         }
-      },
-      // Set to true to disable canceling the overlay by clicking outside it.
-      noCancelOnOutsideClick: {
-        type: Boolean,
-        value: true
-      }
-    },
+      };
+    }
 
-    listeners: {
-      'neon-animation-finish': '_onNeonAnimationFinish',
-    },
+    constructor() {
+      super();
+      this._onNeonAnimationFinish = this._onNeonAnimationFinish.bind(this);
+    }
 
-    _renderOpened: function() {
+    connectedCallback() {
+      super.connectedCallback();
+      this.addEventListener('neon-animation-finish', this._onNeonAnimationFinish);
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.removeEventListener('neon-animation-finish', this._onNeonAnimationFinish);
+    }
+
+    _renderOpened() {
       this.cancelAnimation();
       this.playAnimation('entry');
-    },
+    }
 
-    _renderClosed: function() {
+    _renderClosed() {
       this.cancelAnimation();
       this.playAnimation('exit');
-    },
+    }
 
-    _onNeonAnimationFinish: function() {
+    _onNeonAnimationFinish() {
       if (this.opened) {
         this._finishRenderOpened();
       } else {
         this._finishRenderClosed();
       }
     }
-  });
+  }
+  window.customElements.define(AuthorizationDialog.is, AuthorizationDialog);
   </script>
 </dom-module>

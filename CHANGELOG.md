@@ -32,3 +32,8 @@
 
 
 
+# [2.0.0](https://github.com/advanced-rest-client/auth-dialogs/compare/0.1.2...2.0.0) (2019-02-14)
+
+
+
+

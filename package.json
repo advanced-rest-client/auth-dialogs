@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "description": "Authorization dialogs for the Advanced REST CLient",
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.1.1"
+    "@polymer/gen-typescript-declarations": "^1.6.1"
   },
   "private": false,
   "main": "auth-dialog-basic.html",

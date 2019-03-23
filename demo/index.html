@@ -1,23 +1,30 @@
-<!doctype html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
   <title>auth-dialogs demo</title>
-  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-  <link rel="import" href="../../neon-animation/web-animations.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../paper-button/paper-button.html">
-  <link rel="import" href="../../paper-toast/paper-toast.html">
-  <link rel="import" href="../auth-dialogs.html">
-  <custom-style>
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="../../@polymer/polymer/lib/elements/dom-bind.js"></script>
+  <script type="module" src="../../@polymer/neon-animation/web-animations.js"></script>
+  <script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../../@polymer/paper-button/paper-button.js"></script>
+  <script type="module" src="../../@polymer/paper-toast/paper-toast.js"></script>
+  <script type="module" src="../auth-dialogs.js"></script>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
     <style include="demo-pages-shared-styles"></style>
-  </custom-style>
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 </head>
-<body unresolved>
-  <dom-bind id="demo">
+<body unresolved="">
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-bind id="demo">
     <template>
       <div class="vertical-section-container centered">
         <h3>auth-dialog-basic</h3>
@@ -29,39 +36,53 @@
         <auth-dialog-ntlm on-auth-dialog-closed="onNtlmAuthData"></auth-dialog-ntlm>
       </div>
     </template>
-  </dom-bind>
-  <paper-toast id="toast" duration="5000"></paper-toast>
-  <script>
-  (function(scope) {
-    scope.openBasic = function(e) {
-      e.target.nextElementSibling.opened = true;
-    };
-    scope.openNtlm = function(e) {
-      e.target.nextElementSibling.opened = true;
-    };
-    scope.onBasicAuthData = function(e) {
-      const toast = document.getElementById('toast');
-      if (e.detail.cancelled) {
-        toast.text = 'Auth dialog was canceled.';
-      } else {
-        const auth = e.detail.value;
-        toast.text = 'User name: ' + auth.username + ', password: ' + auth.password +
-          ', hash: ' + auth.hash + ', type: ' + e.detail.type;
-      }
-      toast.opened = true;
-    };
-    scope.onNtlmAuthData = function(e) {
-      const toast = document.getElementById('toast');
-      if (e.detail.cancelled) {
-        toast.text = 'Auth dialog was canceled.';
-      } else {
-        const auth = e.detail.value;
-        toast.text = 'User name: ' + auth.username + ', password: ' + auth.password +
-          ', domain: ' + auth.domain + ', type: ' + e.detail.type;
-      }
-      toast.opened = true;
-    };
-  })(document.getElementById('demo'));
-  </script>
-</body>
-</html>
+  </dom-bind>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<paper-toast id="toast" duration="5000"></paper-toast>`;
+document.body.appendChild($_documentContainer.content);
+</script>
+  <script type="module">
+import '../../@polymer/polymer/lib/elements/dom-bind.js';
+import '../../@polymer/neon-animation/web-animations.js';
+import '../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+import '../../@polymer/paper-button/paper-button.js';
+import '../../@polymer/paper-toast/paper-toast.js';
+import '../auth-dialogs.js';
+(function(scope) {
+  scope.openBasic = function(e) {
+    e.target.nextElementSibling.opened = true;
+  };
+  scope.openNtlm = function(e) {
+    e.target.nextElementSibling.opened = true;
+  };
+  scope.onBasicAuthData = function(e) {
+    const toast = document.getElementById('toast');
+    if (e.detail.cancelled) {
+      toast.text = 'Auth dialog was canceled.';
+    } else {
+      const auth = e.detail.value;
+      toast.text = 'User name: ' + auth.username + ', password: ' + auth.password +
+        ', hash: ' + auth.hash + ', type: ' + e.detail.type;
+    }
+    toast.opened = true;
+  };
+  scope.onNtlmAuthData = function(e) {
+    const toast = document.getElementById('toast');
+    if (e.detail.cancelled) {
+      toast.text = 'Auth dialog was canceled.';
+    } else {
+      const auth = e.detail.value;
+      toast.text = 'User name: ' + auth.username + ', password: ' + auth.password +
+        ', domain: ' + auth.domain + ', type: ' + e.detail.type;
+    }
+    toast.opened = true;
+  };
+})(document.getElementById('demo'));
+</script>
+
+
+</body></html>

@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -10,9 +10,9 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
--->
-<link rel="import" href="../polymer/lib/utils/mixin.html">
-<script>
+*/
+import { dedupingMixin } from '../@polymer/polymer/lib/utils/mixin.js';
+
 (function(global) {
 'use strict';
 if (!global.ArcBehaviors) {
@@ -32,7 +32,7 @@ if (!global.ArcBehaviors) {
  * @mixinFunction
  * @memberof ArcBehaviors
  */
-ArcBehaviors.AuthDialogMixin = Polymer.dedupingMixin((base) => {
+ArcBehaviors.AuthDialogMixin = dedupingMixin((base) => {
   /**
    * @polymer
    * @mixinClass
@@ -98,4 +98,3 @@ ArcBehaviors.AuthDialogMixin = Polymer.dedupingMixin((base) => {
    */
 });
 })(window);
-</script>

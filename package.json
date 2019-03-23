@@ -1,22 +1,40 @@
 {
-  "name": "auth-dialogs",
-  "version": "2.0.0",
-  "license": "Apache-2.0",
   "description": "Authorization dialogs for the Advanced REST CLient",
-  "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.6.1"
+  "keywords": [
+    "web-components",
+    "polymer",
+    "advanced-rest-client",
+    "authorization",
+    "dialog",
+    "basic-authorization",
+    "ntlm-authorization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/auth-dialogs.git"
   },
-  "private": false,
-  "main": "auth-dialog-basic.html",
+  "name": "@advanced-rest-client/auth-dialogs",
+  "version": "3.0.0-preview.1",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/paper-toast": "^3.0.0",
+    "web-animations-js": "^2.3.1",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
+  },
+  "main": "auth-dialog-basic.js",
   "scripts": {
     "lint": "polymer lint auth-dialog-basic.html auth-dialog-ntlm.html auth-dialogs-mixin.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"auth-dialogs:local-test\"",
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/auth-dialogs.git"
   },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/auth-dialogs/issues",
@@ -25,5 +43,16 @@
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
-  ]
+  ],
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "@polymer/paper-dialog-behavior": "^3.0.0",
+    "@polymer/neon-animation": "^3.0.0",
+    "@polymer/paper-input": "^3.0.0",
+    "@polymer/paper-button": "^3.0.0"
+  }
 }

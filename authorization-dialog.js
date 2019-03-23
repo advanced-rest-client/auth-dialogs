@@ -11,18 +11,16 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import { PolymerElement } from '../@polymer/polymer/polymer-element.js';
-
-import { mixinBehaviors } from '../@polymer/polymer/lib/legacy/class.js';
-import '../@polymer/paper-button/paper-button.js';
-import '../@polymer/paper-styles/shadow.js';
-import { PaperDialogBehavior } from '../@polymer/paper-dialog-behavior/paper-dialog-behavior.js';
-import { NeonAnimationRunnerBehavior } from '../@polymer/neon-animation/neon-animation-runner-behavior.js';
-import '../@polymer/neon-animation/animations/slide-from-top-animation.js';
-import '../@polymer/neon-animation/animations/slide-up-animation.js';
-import '../@polymer/neon-animation/animations/fade-out-animation.js';
-import '../@polymer/neon-animation/animations/fade-in-animation.js';
-import { html } from '../@polymer/polymer/lib/utils/html-tag.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {mixinBehaviors} from '../../@polymer/polymer/lib/legacy/class.js';
+import {PaperDialogBehavior} from '../../@polymer/paper-dialog-behavior/paper-dialog-behavior.js';
+import {NeonAnimationRunnerBehavior} from '../../@polymer/neon-animation/neon-animation-runner-behavior.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@polymer/paper-button/paper-button.js';
+import '../../@polymer/neon-animation/animations/slide-from-top-animation.js';
+import '../../@polymer/neon-animation/animations/slide-up-animation.js';
+import '../../@polymer/neon-animation/animations/fade-out-animation.js';
+import '../../@polymer/neon-animation/animations/fade-in-animation.js';
 /**
  * Base authorization dialog for Advanced REST Client. It is to be used to
  * create authorization dialogs with common UI and animations.
@@ -56,8 +54,8 @@ import { html } from '../@polymer/polymer/lib/utils/html-tag.js';
  * @customElement
  * @memberof UiElements
  * @demo demo/index.html
- * @appliesMixin Polymer.PaperDialogBehavior
- * @appliesMixin Polymer.NeonAnimationRunnerBehavior
+ * @polymerBehavior Polymer.PaperDialogBehavior
+ * @polymerBehavior Polymer.NeonAnimationRunnerBehavior
  */
 class AuthorizationDialog extends mixinBehaviors([
     PaperDialogBehavior,
@@ -73,8 +71,9 @@ class AuthorizationDialog extends mixinBehaviors([
       top: 0px;
       background: var(--paper-dialog-background-color, var(--primary-background-color));
       color: var(--paper-dialog-color, var(--primary-text-color));
-      @apply --arc-font-body1;
-      @apply --shadow-elevation-16dp;
+      box-shadow: var(--shadow-elevation-16dp, 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+                  0  6px 30px 5px rgba(0, 0, 0, 0.12),
+                  0  8px 10px -5px rgba(0, 0, 0, 0.4));
       @apply --paper-dialog;
       @apply --authorization-dialog;
     }
@@ -104,8 +103,15 @@ class AuthorizationDialog extends mixinBehaviors([
       margin: 0;
       margin-bottom: 24px;
       color: var(--paper-dialog-button-color, var(--primary-color));
-      @apply --layout-horizontal;
-      @apply --layout-end-justified;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -ms-flex-direction: row;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      -ms-flex-pack: end;
+      -webkit-justify-content: flex-end;
+      justify-content: flex-end;
     }
     </style>
     <div class="dialog">
@@ -121,7 +127,9 @@ class AuthorizationDialog extends mixinBehaviors([
 `;
   }
 
-  static get is() { return 'authorization-dialog'; }
+  static get is() {
+    return 'authorization-dialog';
+  }
   static get properties() {
     return {
       animationConfig: {

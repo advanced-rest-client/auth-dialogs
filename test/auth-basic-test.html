@@ -3,10 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../wct-browser-legacy/browser.js"></script>
-    <script type="module" src="../../@polymer/neon-animation/web-animations.js"></script>
-    <script type="module" src="../auth-dialogs.js"></script>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script src="../node_modules/web-animations-js/web-animations-next.min.js"></script>
+
   </head>
   <body>
 
@@ -17,65 +22,64 @@
     </test-fixture>
 
     <script type="module">
-import '../../@polymer/neon-animation/web-animations.js';
-import '../auth-dialogs.js';
+    import '../auth-dialog-basic.js';
 
-suite('basic auth', function() {
-  let element;
-  const username = 'test';
-  const password = 'test';
-  const hash = 'dGVzdDp0ZXN0';
+    suite('basic auth', function() {
+      let element;
+      const username = 'test';
+      const password = 'test';
+      const hash = 'dGVzdDp0ZXN0';
 
-  setup(function(done) {
-    element = fixture('basic');
-    element.addEventListener('iron-overlay-opened', function() {
-      done();
+      setup(function(done) {
+        element = fixture('basic');
+        element.addEventListener('iron-overlay-opened', function() {
+          done();
+        });
+        element.opened = true;
+      });
+
+      test('Fires auth-dialog-closed custom event when opened set to false', function(done) {
+        element.addEventListener('auth-dialog-closed', function() {
+          done();
+        });
+        element.opened = false;
+      });
+
+      test('auth-dialog-closed is cancelled when opened set to false', function(done) {
+        element.addEventListener('auth-dialog-closed', function(e) {
+          assert.isTrue(e.detail.canceled);
+          done();
+        });
+        element.opened = false;
+      });
+
+      test('Fires auth-dialog-closed when accepted', function(done) {
+        element.username = username;
+        element.password = password;
+        element.addEventListener('auth-dialog-closed', function() {
+          done();
+        });
+        const dialog = element.shadowRoot.querySelector('authorization-dialog');
+        const button = dialog.shadowRoot.querySelector('paper-button[dialog-confirm]');
+        button.click();
+      });
+
+      test('auth-dialog-closed contains auth data', function(done) {
+        element.username = username;
+        element.password = password;
+        element.addEventListener('auth-dialog-closed', function(e) {
+          assert.equal(e.detail.value.username, username, 'User name is set');
+          assert.equal(e.detail.value.password, password, 'Password is set');
+          assert.equal(e.detail.value.hash, hash, 'Hash is set');
+          assert.equal(e.detail.type, 'basic', 'Type is set');
+          done();
+        });
+        const dialog = element.shadowRoot.querySelector('authorization-dialog');
+        const button = dialog.shadowRoot.querySelector('paper-button[dialog-confirm]');
+        button.click();
+      });
     });
-    element.opened = true;
-  });
-
-  test('Fires auth-dialog-closed custom event when opened set to false', function(done) {
-    element.addEventListener('auth-dialog-closed', function() {
-      done();
-    });
-    element.opened = false;
-  });
-
-  test('auth-dialog-closed is cancelled when opened set to false', function(done) {
-    element.addEventListener('auth-dialog-closed', function(e) {
-      assert.isTrue(e.detail.canceled);
-      done();
-    });
-    element.opened = false;
-  });
-
-  test('Fires auth-dialog-closed when accepted', function(done) {
-    element.username = username;
-    element.password = password;
-    element.addEventListener('auth-dialog-closed', function() {
-      done();
-    });
-    const dialog = element.shadowRoot.querySelector('authorization-dialog');
-    const button = dialog.shadowRoot.querySelector('paper-button[dialog-confirm]');
-    button.click();
-  });
-
-  test('auth-dialog-closed contains auth data', function(done) {
-    element.username = username;
-    element.password = password;
-    element.addEventListener('auth-dialog-closed', function(e) {
-      assert.equal(e.detail.value.username, username, 'User name is set');
-      assert.equal(e.detail.value.password, password, 'Password is set');
-      assert.equal(e.detail.value.hash, hash, 'Hash is set');
-      assert.equal(e.detail.type, 'basic', 'Type is set');
-      done();
-    });
-    const dialog = element.shadowRoot.querySelector('authorization-dialog');
-    const button = dialog.shadowRoot.querySelector('paper-button[dialog-confirm]');
-    button.click();
-  });
-});
-</script>
+    </script>
 
   </body>
 </html>

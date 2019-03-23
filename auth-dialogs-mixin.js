@@ -11,16 +11,7 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import { dedupingMixin } from '../@polymer/polymer/lib/utils/mixin.js';
-
-(function(global) {
-'use strict';
-if (!global.ArcBehaviors) {
-  /**
-   * @namespace ArcBehaviors
-   */
-  global.ArcBehaviors = {};
-}
+import {dedupingMixin} from '../../@polymer/polymer/lib/utils/mixin.js';
 
 /**
  * Contains a common function for authorization dialogs.
@@ -32,7 +23,7 @@ if (!global.ArcBehaviors) {
  * @mixinFunction
  * @memberof ArcBehaviors
  */
-ArcBehaviors.AuthDialogMixin = dedupingMixin((base) => {
+export const AuthDialogMixin = dedupingMixin((base) => {
   /**
    * @polymer
    * @mixinClass
@@ -97,4 +88,3 @@ ArcBehaviors.AuthDialogMixin = dedupingMixin((base) => {
    * not set.
    */
 });
-})(window);

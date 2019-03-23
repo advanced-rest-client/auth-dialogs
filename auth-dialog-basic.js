@@ -11,13 +11,12 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import { PolymerElement } from '../@polymer/polymer/polymer-element.js';
-
-import '../@polymer/paper-input/paper-input.js';
-import '../paper-masked-input/paper-masked-input.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@polymer/paper-input/paper-input.js';
+import '../../@advanced-rest-client/paper-masked-input/paper-masked-input.js';
 import './authorization-dialog.js';
-import './auth-dialogs-mixin.js';
-import { html } from '../@polymer/polymer/lib/utils/html-tag.js';
+import {AuthDialogMixin} from './auth-dialogs-mixin.js';
 /**
  * Authorization dialogs for Advanced REST Client.
  *
@@ -36,9 +35,9 @@ import { html } from '../@polymer/polymer/lib/utils/html-tag.js';
  * @customElement
  * @memberof UiElements
  * @demo demo/index.html
- * @appliesMixin ArcBehaviors.AuthDialogMixin
+ * @appliesMixin AuthDialogMixin
  */
-class AuthDialogBasic extends ArcBehaviors.AuthDialogMixin(PolymerElement) {
+class AuthDialogBasic extends AuthDialogMixin(PolymerElement) {
   static get template() {
     return html`
     <authorization-dialog opened="{{opened}}">
@@ -50,7 +49,9 @@ class AuthDialogBasic extends ArcBehaviors.AuthDialogMixin(PolymerElement) {
 `;
   }
 
-  static get is() { return 'auth-dialog-basic'; }
+  static get is() {
+    return 'auth-dialog-basic';
+  }
   static get properties() {
     return {
       // User login

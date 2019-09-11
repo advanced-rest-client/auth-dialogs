@@ -7,18 +7,8 @@
 
 # &lt;auth-dialogs&gt;
 
-Common authorization dialogs to provide client credentials
-
-## Example:
-
-```html
-<auth-dialog-basic on-auth-dialog-closed="onBasicAuthData"></auth-dialog-basic>
-<auth-dialog-ntlm on-auth-dialog-closed="onAuthData"></auth-dialog-ntlm>
-```
-
-## API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
+Authorization dialogs to provide client credentials for Basic and NTLM authorization schemes.
+Used primarily in Advanced REST Client.
 
 ## Usage
 
@@ -27,39 +17,17 @@ This components is a part of [API components ecosystem](https://elements.advance
 npm install --save @advanced-rest-client/auth-dialogs
 ```
 
-### In an html file
-
-```html
-<html>
-  <head>
-    <script type="module">
-      import './node_modules/@advanced-rest-client/auth-dialogs/auth-dialogs.js';
-    </script>
-  </head>
-  <body>
-    <auth-dialog-basic opened></auth-dialog-basic>
-    <auth-dialog-ntlm></auth-dialog-ntlm>
-    <script>
-    Array.from(document.querySelectorAll('auth-dialog-basic,auth-dialog-ntlm'))
-    .forEach((element) => {
-      element.addEventListener('auth-dialog-closed', (e) => console.log(e.detail.value));
-    });
-    </script>
-  </body>
-</html>
-```
-
-### In a Polymer 3 element
+### In a LitElement
 
 ```js
-import {PolymerElement, html} from './node_modules/@polymer/polymer/polymer-element.js';
-import './node_modules/@advanced-rest-client/auth-dialogs/auth-dialogs.js';
+import { LitElement, html } from 'lit-element';
+import '@advanced-rest-client/auth-dialogs/auth-dialogs.js';
 
-class SampleElement extends PolymerElement {
-  static get template() {
+class SampleElement extends LitElement {
+  render() {
     return html`
-    <auth-dialog-basic on-auth-dialog-closed="onAuthData"></auth-dialog-basic>
-    <auth-dialog-ntlm on-auth-dialog-closed="onAuthData"></auth-dialog-ntlm>
+    <auth-dialog-basic @auth-dialog-closed="${this.onAuthData}"></auth-dialog-basic>
+    <auth-dialog-ntlm @auth-dialog-closed="${this.onAuthData}"></auth-dialog-ntlm>
     `;
   }
 
@@ -78,23 +46,26 @@ class SampleElement extends PolymerElement {
 customElements.define('sample-element', SampleElement);
 ```
 
-### Installation
+## Development
 
 ```sh
 git clone https://github.com/advanced-rest-client/auth-dialogs
-cd api-url-editor
+cd auth-dialogs
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
+
 ```sh
-polymer test --npm
+npm test
 ```
+
+## API components
+
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)

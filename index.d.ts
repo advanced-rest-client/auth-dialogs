@@ -5,10 +5,12 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   auth-dialog-basic.js
+ *   index.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
-import {AuthDialogBasic} from './src/AuthDialogBasic.js';
+export {AuthDialogBasic} from './src/AuthDialogBasic.js';
+
+export {AuthDialogNtlm} from './src/AuthDialogNtlm.js';

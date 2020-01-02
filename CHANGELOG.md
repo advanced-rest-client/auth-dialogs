@@ -41,3 +41,25 @@
 
 
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/advanced-rest-client/auth-dialogs/compare/2.0.0...3.0.0) (2020-01-02)
+
+## Refactor
+
+* upgraded components to final WC spec and LitELement [13a4a50](https://github.com/advanced-rest-client/auth-dialogs/commit/13a4a50098b3cdbccb1135c70774f9507a162ebd) by Pawel
+
+
+## Other
+
+* Breaking: Upgraded to Polymer 3
+ [61f03ec](https://github.com/advanced-rest-client/auth-dialogs/commit/61f03ecccaa039358a1c4528d35ab4bcf6aac7bb) by Pawel
+* Fix: Added paper button dependency that was added as dev dependency. Also added the paper-button import to the `authorization-dialog.html` that was missing.
+ [9026b3f](https://github.com/advanced-rest-client/auth-dialogs/commit/9026b3f409e457e609bd1c0ec26fe518a7ed4eab) by Pawel Psztyc
+* Update: Renamed test file name
+ [3498f0a](https://github.com/advanced-rest-client/auth-dialogs/commit/3498f0ae45654bb88527acfcb4542118a093c7be) by Pawel Psztyc
+* Update: Removed timeout from tests due to timeout error on Safari 9
+ [469ba2a](https://github.com/advanced-rest-client/auth-dialogs/commit/469ba2a35e4e1d787f4eae53ffdb63eb71682a90) by Pawel Psztyc
+* Update: Updated Travis configuration to connect to Sauce Labs
+ [185b146](https://github.com/advanced-rest-client/auth-dialogs/commit/185b1462855784812d85b229deba3411d1b815f7) by Pawel Psztyc
+
+
